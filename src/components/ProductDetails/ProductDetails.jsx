@@ -13,10 +13,6 @@ const ProductDetails = ({ selectedProduct }) => {
   // Get multiple images from the API or use the main image
   const productImages = selectedProduct?.images || [selectedProduct?.imgUrl];
 
-  const handleQuantityChange = (e) => {
-    setQuantity(e.target.value);
-  };
-
   const handelAdd = (selectedProduct, quantity) => {
     dispatch(addToCart({ product: selectedProduct, num: quantity }));
     toast.success("Product has been added to cart!");
