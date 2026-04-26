@@ -24,8 +24,8 @@ html {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 section {
@@ -70,7 +70,7 @@ button {
 .homeSlide {
   display: flex;
   justify-content: center;
-  background-color: #f6f9fc;
+  background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
   padding-bottom: 0 !important;
 }
 
@@ -105,36 +105,97 @@ button {
   height: auto;
 }
 
-.cart-items .cart-total {
-  background-color: white;
-  padding: 20px;
-  height: 150px;
-  margin-bottom: 30px;
-}
-
 .cart-list {
   position: relative;
   background: white;
-  margin-bottom: 30px;
-  padding: 20px;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.cart-list:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .cart-list .image-holder {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  min-height: 110px;
 }
 
 .cart-items img {
   width: 100%;
   height: 100%;
-  max-width: 300px;
+  max-width: 100px;
   object-fit: contain;
 }
 
 @media (max-width: 767px) {
   .cart-items .container > .row {
-    flex-wrap: wrap-reverse !important;
+    flex-wrap: wrap !important;
+  }
+
+  .cart-list {
+    padding: 12px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .cart-list .image-holder {
+    margin-bottom: 12px;
+    min-height: 90px;
+  }
+
+  .cart-items img {
+    max-width: 80px;
+  }
+
+  .cart-details h3 {
+    font-size: 14px;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .cart-details h4 {
+    font-size: 12px;
+    margin: 0 !important;
+  }
+
+  .cartControl {
+    margin: 8px 0 0 !important;
+    gap: 6px;
+  }
+
+  .cartControl button {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .cart-total {
+    margin-top: 25px;
+    position: static;
+    order: 2;
+  }
+
+  button.delete {
+    width: 30px;
+    height: 30px;
+  }
+
+  button.delete ion-icon {
+    font-size: 16px;
+  }
+
+  .cart-items .container > .row > [md="8"] {
+    order: 1;
+  }
+
+  .cart-items .container > .row > [md="4"] {
+    order: 2;
   }
 }
 
@@ -143,25 +204,28 @@ button {
 }
 
 .cart-items .cart-details h3 {
-  font-size: 20px;
-  font-weight: 500;
-  width: fit-content;
-  text-align: center;
-  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 8px 0 !important;
+  line-height: 1.3;
 }
 
 .cart-items .cart-details h4 {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
-  margin-top: 50px;
-  color: grey;
-  width: fit-content;
+  color: #666;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .cart-items h4 span {
-  color: #0f3460;
-  margin-left: 20px;
-  font-weight: 500;
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 15px;
+  margin-left: 0 !important;
 }
 
 .removeCart {
@@ -171,47 +235,76 @@ button {
 
 .cartControl {
   display: flex;
-  gap: 5px;
-  justify-content: center;
+  gap: 8px;
+  justify-content: flex-start;
   padding: 0 !important;
-  margin: 20px 0 0;
+  margin: 10px 0 0 0 !important;
 }
 
 .cartControl button {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .incCart {
-  background: none;
-  border: 1px solid rgb(3 0 71 / 9%);
-  color: #0f3460;
+  background: linear-gradient(135deg, #0f3460 0%, #1e5799 100%);
+  border: none;
+  color: white;
+}
+
+.incCart:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(15, 52, 96, 0.3);
 }
 
 .desCart {
-  background: #f6f9fc;
-}
-
-.cart-total h4 {
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.cart-total h3 {
-  font-size: 20px;
-  font-weight: 500;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+  border: none;
   color: #0f3460;
+}
+
+.desCart:hover {
+  background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+  transform: scale(1.05);
+}
+
+.cart-items .cart-total {
+  background: #ffffff;
+  padding: 30px;
+  padding-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(15, 52, 96, 0.2);
+  position: sticky;
+  top: 100px;
 }
 
 .cart-total h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgb(3 0 71 / 9%);
-  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 25px;
   color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 15px;
+}
+
+.cart-total h4 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  margin: 0 !important;
+}
+
+.cart-total h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f3460;
+  margin: 10px 0 0 0 !important;
 }
 
 .no-items {
@@ -221,19 +314,63 @@ button {
   height: 130px;
 }
 
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background: #f6f9fc;
+  border-radius: 10px;
+  margin: 30px 0;
+}
+
+.empty-cart ion-icon {
+  font-size: 80px;
+  color: #0f3460;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-cart h1 {
+  color: #0f3460;
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.empty-cart p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
 button.delete {
   position: absolute;
-  right: 0;
-  top: 20px;
-  width: max-content;
+  right: 15px;
+  top: 15px;
+  width: 36px;
+  height: 36px;
   border: none;
   outline: none;
-  background-color: transparent;
-  color: black;
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.delete:hover {
+  background-color: #e74c3c;
+  color: white;
+  transform: scale(1.1);
 }
 
 button.delete ion-icon {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 @media (max-width: 575px) {
@@ -244,4 +381,47 @@ button.delete ion-icon {
   .cart-content .cart-details h4 {
     margin: 10px auto;
   }
+}
+
+/* Loading Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Improved Search Bar Styles */
+.search-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 12px 45px 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #0f3460;
+  box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.1);
+}
+
+.search-container .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #666;
+  pointer-events: none;
 }

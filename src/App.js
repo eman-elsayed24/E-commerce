@@ -10,6 +10,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Product = lazy(() => import("./pages/Product"));
+const Favorites = lazy(() => import("./pages/Favorites"));
 function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -31,6 +32,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
         <Footer />
       </Router>

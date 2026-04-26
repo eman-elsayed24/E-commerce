@@ -10,17 +10,12 @@ import {
 const Cart = () => {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  // middlware to localStorage
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
-    0
+    0,
   );
   useEffect(() => {
     window.scrollTo(0, 0);
-    // if(CartItem.length ===0) {
-    //   const storedCart = localStorage.getItem("cartItem");
-    //   setCartItem(JSON.parse(storedCart));
-    // }
   }, []);
   return (
     <section className="cart-items">
@@ -28,7 +23,11 @@ const Cart = () => {
         <Row className="justify-content-center">
           <Col md={8}>
             {cartList.length === 0 && (
-              <h1 className="no-items product">No Items are add in Cart</h1>
+              <div className="empty-cart">
+                <ion-icon name="cart"></ion-icon>
+                <h1>Your Cart is Empty</h1>
+                <p>Add some products to get started!</p>
+              </div>
             )}
             {cartList.map((item) => {
               const productQty = item.price * item.qty;
@@ -39,29 +38,29 @@ const Cart = () => {
                       <img src={item.imgUrl} alt="" />
                     </Col>
                     <Col sm={8} md={9}>
-                      <Row className="cart-content justify-content-center">
-                        <Col xs={12} sm={9} className="cart-details">
+                      <Row className="cart-content">
+                        <Col xs={12} className="cart-details">
                           <h3>{item.productName}</h3>
                           <h4>
                             ${item.price}.00 * {item.qty}
                             <span>${productQty}.00</span>
                           </h4>
-                        </Col>
-                        <Col xs={12} sm={3} className="cartControl">
-                          <button
-                            className="incCart"
-                            onClick={() =>
-                              dispatch(addToCart({ product: item, num: 1 }))
-                            }
-                          >
-                            <i className="fa-solid fa-plus"></i>
-                          </button>
-                          <button
-                            className="desCart"
-                            onClick={() => dispatch(decreaseQty(item))}
-                          >
-                            <i className="fa-solid fa-minus"></i>
-                          </button>
+                          <div className="cartControl">
+                            <button
+                              className="incCart"
+                              onClick={() =>
+                                dispatch(addToCart({ product: item, num: 1 }))
+                              }
+                            >
+                              <i className="fa-solid fa-plus"></i>
+                            </button>
+                            <button
+                              className="desCart"
+                              onClick={() => dispatch(decreaseQty(item))}
+                            >
+                              <i className="fa-solid fa-minus"></i>
+                            </button>
+                          </div>
                         </Col>
                       </Row>
                     </Col>

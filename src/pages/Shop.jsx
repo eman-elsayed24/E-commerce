@@ -1,34 +1,59 @@
 import { Col, Container, Row } from "react-bootstrap";
 import FilterSelect from "../components/FilterSelect";
 import SearchBar from "../components/SeachBar/SearchBar";
-import { Fragment, useState } from "react";
-import { products } from "../utils/products";
+import { Fragment, useState, useEffect } from "react";
+import { getProducts } from "../utils/products";
 import ShopList from "../components/ShopList";
-import Banner from "../components/Banner/Banner";
+import Skeleton from "../components/Skeleton/Skeleton";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
 
 const Shop = () => {
-  const [filterList, setFilterList] = useState(
-    products.filter((item) => item.category === "sofa")
-  );
+  const [products, setProducts] = useState([]);
+  const [filterList, setFilterList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const allProducts = await getProducts();
+        setProducts(allProducts);
+        setFilterList(
+          allProducts.filter((item) => item.category === "furniture"),
+        );
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   useWindowScrollToTop();
 
   return (
     <Fragment>
-      <Banner title="product" />
-      <section className="filter-bar">
+      <section
+        className="filter-bar"
+        style={{
+          background: "linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)",
+          paddingTop: "40px",
+        }}
+      >
         <Container className="filter-bar-contianer">
           <Row className="justify-content-center">
             <Col md={4}>
-              <FilterSelect setFilterList={setFilterList} />
+              <FilterSelect setFilterList={setFilterList} products={products} />
             </Col>
             <Col md={8}>
-              <SearchBar setFilterList={setFilterList} />
+              <SearchBar setFilterList={setFilterList} products={products} />
             </Col>
           </Row>
         </Container>
         <Container>
-          <ShopList productItems={filterList} />
+          {loading ? <Skeleton /> : <ShopList productItems={filterList} />}
         </Container>
       </section>
     </Fragment>

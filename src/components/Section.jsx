@@ -8,7 +8,16 @@ const Section = ({ title, bgColor, productItems }) => {
         <div className="heading">
           <h1>{title}</h1>
         </div>
-        <Row className="justify-content-center">
+        <Row
+          style={{
+            marginTop: "40px",
+            marginLeft: "-12px",
+            marginRight: "-12px",
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {productItems.map((productItem) => {
             return (
               <ProductCard

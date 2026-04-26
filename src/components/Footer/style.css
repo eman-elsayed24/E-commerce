@@ -1,5 +1,5 @@
 footer {
-  background-color: #0f3460;
+  background: linear-gradient(135deg, #0f3460 0%, #1e5799 100%);
   padding: 80px 0;
   color: #fff;
 }
@@ -13,14 +13,51 @@ footer h1 {
   font-size: 25px;
   font-weight: 800;
   width: max-content;
+  color: white;
 }
 
 footer .logo {
   color: white;
-  display:flex;
-  align-items:center;
-  gap:5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   margin-bottom: 20px;
+}
+
+footer .logo h1 {
+  color: white;
+  margin: 0;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+
+footer .logo ion-icon {
+  color: white;
+  font-size: 25px;
+}
+
+footer .footer-logo {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+footer .footer-logo h1 {
+  color: white;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+footer .footer-logo ion-icon {
+  color: white;
+  font-size: 25px;
 }
 footer h2 {
   font-size: 20px;
