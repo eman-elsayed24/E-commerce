@@ -18,6 +18,26 @@ const Shop = () => {
   const [total, setTotal] = useState(0);
   const [activeFilter, setActiveFilter] = useState(null);
 
+  useEffect(() => {
+    const loadProducts = async (currentSkip = 0) => {
+      try {
+        const result = await getProducts(LIMIT, currentSkip);
+        setTotal(result.total);
+        setProducts(result.products);
+        setFilterList(result.products);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    };
+
+    const init = async () => {
+      setLoading(true);
+      await loadProducts(0);
+      setLoading(false);
+    };
+    init();
+  }, []);
+
   const loadProducts = async (currentSkip = 0, append = false) => {
     try {
       const result = await getProducts(LIMIT, currentSkip);
@@ -36,15 +56,6 @@ const Shop = () => {
       console.error("Error loading products:", error);
     }
   };
-
-  useEffect(() => {
-    const init = async () => {
-      setLoading(true);
-      await loadProducts(0, false);
-      setLoading(false);
-    };
-    init();
-  }, []);
 
   const handleLoadMore = async () => {
     const newSkip = skip + LIMIT;
