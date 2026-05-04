@@ -5,10 +5,10 @@ import {
   fetchProductsByCategory,
 } from "../services/api";
 
-import sofaSlide from "../Images/counter-timer-img.png";
+import sofaSlide from "../Images/1.png";
 import watchSlide from "../Images/watch-07.png";
 import phone08 from "../Images/phone-08.png";
-import wireless01 from "../Images/wireless-03.png";
+import wireless01 from "../Images/2.png";
 
 export const SliderData = [
   {
@@ -25,8 +25,8 @@ export const SliderData = [
   },
   {
     id: 3,
-    title: "Crystal Clear Sound Quality",
-    desc: "Experience premium audio with our exclusive wireless collection designed for audiophiles.",
+    title: "Luxury Fragrance Collection",
+    desc: "Discover our exclusive range of premium perfumes crafted for those who appreciate elegance.",
     cover: wireless01,
   },
   {
@@ -65,8 +65,8 @@ export const serviceData = [
 ];
 
 // API-based product functions
-export const getProducts = async () => {
-  return await fetchProducts();
+export const getProducts = async (limit = 20, skip = 0) => {
+  return await fetchProducts(limit, skip);
 };
 
 export const getProductById = async (id) => {
@@ -79,8 +79,8 @@ export const getProductsByCategory = async (category) => {
 
 // For discount products, we'll fetch and add discount property
 export const getDiscountProducts = async () => {
-  const products = await fetchProducts(10);
-  return products.map((product) => ({
+  const result = await fetchProducts(10);
+  return result.products.map((product) => ({
     ...product,
     discount: Math.floor(Math.random() * 30) + 10, // Random discount 10-40%
   }));

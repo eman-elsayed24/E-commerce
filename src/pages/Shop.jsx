@@ -7,31 +7,61 @@ import ShopList from "../components/ShopList";
 import Skeleton from "../components/Skeleton/Skeleton";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
 
+const LIMIT = 20;
+
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [skip, setSkip] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [activeFilter, setActiveFilter] = useState(null);
+
+  const loadProducts = async (currentSkip = 0, append = false) => {
+    try {
+      const result = await getProducts(LIMIT, currentSkip);
+      setTotal(result.total);
+      if (append) {
+        setProducts((prev) => {
+          const updated = [...prev, ...result.products];
+          if (!activeFilter) setFilterList(updated);
+          return updated;
+        });
+      } else {
+        setProducts(result.products);
+        if (!activeFilter) setFilterList(result.products);
+      }
+    } catch (error) {
+      console.error("Error loading products:", error);
+    }
+  };
 
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        setLoading(true);
-        const allProducts = await getProducts();
-        setProducts(allProducts);
-        setFilterList(
-          allProducts.filter((item) => item.category === "furniture"),
-        );
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
+    const init = async () => {
+      setLoading(true);
+      await loadProducts(0, false);
+      setLoading(false);
     };
-
-    loadProducts();
+    init();
   }, []);
 
+  const handleLoadMore = async () => {
+    const newSkip = skip + LIMIT;
+    setLoadingMore(true);
+    await loadProducts(newSkip, true);
+    setSkip(newSkip);
+    setLoadingMore(false);
+  };
+
+  const handleFilterChange = (filtered) => {
+    setActiveFilter(filtered === products ? null : filtered);
+    setFilterList(filtered);
+  };
+
   useWindowScrollToTop();
+
+  const hasMore = skip + LIMIT < total && !activeFilter;
 
   return (
     <Fragment>
@@ -45,7 +75,10 @@ const Shop = () => {
         <Container className="filter-bar-contianer">
           <Row className="justify-content-center">
             <Col md={4}>
-              <FilterSelect setFilterList={setFilterList} products={products} />
+              <FilterSelect
+                setFilterList={handleFilterChange}
+                products={products}
+              />
             </Col>
             <Col md={8}>
               <SearchBar setFilterList={setFilterList} products={products} />
@@ -53,7 +86,34 @@ const Shop = () => {
           </Row>
         </Container>
         <Container>
-          {loading ? <Skeleton /> : <ShopList productItems={filterList} />}
+          {loading ? (
+            <Skeleton />
+          ) : (
+            <>
+              <ShopList productItems={filterList} />
+              {hasMore && (
+                <div style={{ textAlign: "center", margin: "30px 0" }}>
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    style={{
+                      padding: "12px 40px",
+                      backgroundColor: "#0f3460",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      opacity: loadingMore ? 0.7 : 1,
+                    }}
+                  >
+                    {loadingMore ? "Loading..." : "Load More"}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </Container>
       </section>
     </Fragment>

@@ -26,7 +26,7 @@ const NavBar = () => {
       className={isFixed ? "navbar fixed" : "navbar"}
     >
       <Container className="navbar-container">
-        <Navbar.Brand to="/">
+        <Navbar.Brand as={Link} to="/">
           <ion-icon name="storefront"></ion-icon>
           <h1 className="logo">prime market</h1>
         </Navbar.Brand>

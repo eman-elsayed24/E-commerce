@@ -1,11 +1,14 @@
 import Select from "react-select";
 
 const options = [
-  { value: "clothes", label: "Clothes" },
-  { value: "electronics", label: "Electronics" },
+  { value: "smartphones", label: "Smartphones" },
+  { value: "laptops", label: "Laptops" },
   { value: "furniture", label: "Furniture" },
-  { value: "shoes", label: "Shoes" },
-  { value: "miscellaneous", label: "Miscellaneous" },
+  { value: "beauty", label: "Beauty" },
+  { value: "mens-watches", label: "Men's Watches" },
+  { value: "womens-watches", label: "Women's Watches" },
+  { value: "womens-bags", label: "Women's Bags" },
+  { value: "sports-accessories", label: "Sports Accessories" },
 ];
 
 const customStyles = {

@@ -20,7 +20,7 @@ const Home = () => {
           getDiscountProducts(),
         ]);
 
-        setProducts(allProducts);
+        setProducts(allProducts.products);
         setDiscountProducts(discountItems);
       } catch (error) {
         console.error("Error loading products:", error);
