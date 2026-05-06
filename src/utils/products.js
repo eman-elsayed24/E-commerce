@@ -79,10 +79,10 @@ export const getProductsByCategory = async (category) => {
 
 // For discount products, we'll fetch and add discount property
 export const getDiscountProducts = async () => {
-  const result = await fetchProducts(10);
+  const result = await fetchProducts(8);
   return result.products.map((product) => ({
     ...product,
-    discount: Math.floor(Math.random() * 30) + 10, // Random discount 10-40%
+    discount: Math.floor(Math.random() * 30) + 10,
   }));
 };
 

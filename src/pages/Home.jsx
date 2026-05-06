@@ -32,11 +32,8 @@ const Home = () => {
     loadProducts();
   }, []);
 
-  const newArrivalData = products.filter(
-    (item) =>
-      item.category === "electronics" || item.category === "miscellaneous",
-  );
-  const bestSales = products.filter((item) => item.category === "furniture");
+  const newArrivalData = products.slice(0, 8);
+  const bestSales = products.slice(0, 8);
 
   useWindowScrollToTop();
 
