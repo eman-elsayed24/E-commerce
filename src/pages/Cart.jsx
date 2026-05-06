@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addToCart,
   decreaseQty,
   deleteProduct,
 } from "../app/features/cart/cartSlice";
+import { formatPrice } from "../utils/formatPrice";
 
 const Cart = () => {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
     0,
@@ -42,8 +45,8 @@ const Cart = () => {
                         <Col xs={12} className="cart-details">
                           <h3>{item.productName}</h3>
                           <h4>
-                            ${item.price}.00 * {item.qty}
-                            <span>${productQty}.00</span>
+                            {formatPrice(item.price)} * {item.qty}
+                            <span>{formatPrice(productQty)}</span>
                           </h4>
                           <div className="cartControl">
                             <button
@@ -80,8 +83,40 @@ const Cart = () => {
               <h2>Cart Summary</h2>
               <div className=" d_flex">
                 <h4>Total Price :</h4>
-                <h3>${totalPrice}.00</h3>
+                <h3>{formatPrice(totalPrice)}</h3>
               </div>
+              {cartList.length > 0 && (
+                <button
+                  onClick={() => navigate("/checkout")}
+                  style={{
+                    width: "100%",
+                    marginTop: "20px",
+                    padding: "12px",
+                    background:
+                      "linear-gradient(135deg, #0f3460 0%, #1e5799 100%)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.transform = "translateY(-1px)")
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.transform = "translateY(0)")
+                  }
+                >
+                  <i className="fa fa-lock"></i>
+                  Proceed to Checkout
+                </button>
+              )}
             </div>
           </Col>
         </Row>

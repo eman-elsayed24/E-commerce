@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../app/features/cart/cartSlice";
 import { favoritesActions } from "../../app/features/favorites/favoritesSlice";
+import { formatPrice } from "../../utils/formatPrice";
 
 const ProductCard = ({ title, productItem }) => {
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const ProductCard = ({ title, productItem }) => {
           <i className="fa fa-star"></i>
         </div>
         <div className="price">
-          <h4>${productItem.price}</h4>
+          <h4>{formatPrice(productItem.price)}</h4>
           <button
             aria-label="Add"
             type="submit"

@@ -20,12 +20,14 @@ const Product = () => {
         setLoading(true);
         window.scrollTo(0, 0);
 
-        const [product, allProducts] = await Promise.all([
+        const [product, allProductsResult] = await Promise.all([
           getProductById(id),
-          getProducts(),
+          getProducts(100),
         ]);
 
         setSelectedProduct(product);
+
+        const allProducts = allProductsResult?.products || [];
 
         if (product) {
           const related = allProducts

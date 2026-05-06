@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../app/features/cart/cartSlice";
+import { formatPrice } from "../../utils/formatPrice";
 import "./product-details.css";
 
 const ProductDetails = ({ selectedProduct }) => {
@@ -75,7 +76,7 @@ const ProductDetails = ({ selectedProduct }) => {
                     {selectedProduct?.category}
                   </span>
                   <span className="current-price">
-                    ${selectedProduct?.price}
+                    {formatPrice(selectedProduct?.price)}
                   </span>
                   {selectedProduct?.discount && (
                     <span className="discount-badge">

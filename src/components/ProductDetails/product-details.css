@@ -162,22 +162,18 @@
 
 /* Purchase Section */
 .purchase-section {
-  margin: 30px 0;
-  padding: 25px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  margin: 25px 0;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .quantity-controls-inline {
   display: flex;
   align-items: center;
   gap: 0;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
+  border: 1.5px solid #d0d0d0;
+  border-radius: 8px;
   overflow: hidden;
   background: white;
 }
@@ -206,15 +202,14 @@
 }
 
 .qty-btn {
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   border: none;
-  background: #f8f9fa;
+  background: #f4f4f4;
   color: #0f3460;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,7 +218,6 @@
 .qty-btn:hover {
   background: #0f3460;
   color: white;
-  transform: scale(1.05);
 }
 
 .qty-btn:active {
@@ -231,20 +225,20 @@
 }
 
 .minus-btn {
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid #d0d0d0;
 }
 
 .plus-btn {
-  border-left: 1px solid #e0e0e0;
+  border-left: 1px solid #d0d0d0;
 }
 
 .qty-display {
-  min-width: 60px;
-  height: 45px;
+  min-width: 44px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #2c3e50;
   background: white;
@@ -269,29 +263,26 @@
 }
 
 .add-to-cart-btn {
-  width: 100%;
-  flex: 1;
-  padding: 15px 25px;
+  padding: 10px 24px;
   background: linear-gradient(135deg, #0f3460 0%, #1e5799 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  gap: 8px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .add-to-cart-btn:hover {
   background: linear-gradient(135deg, #1e5799 0%, #0f3460 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(15, 52, 96, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 52, 96, 0.3);
 }
 
 .add-to-cart-btn:active {
@@ -383,15 +374,10 @@
   }
 
   .purchase-section {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .quantity-controls-inline {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .add-to-cart-btn {
-    width: 100%;
+    width: auto;
   }
 }

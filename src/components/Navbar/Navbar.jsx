@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./navbar.css";
 import { Link } from "react-router-dom";
@@ -10,14 +10,14 @@ const NavBar = () => {
   const [expand, setExpand] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
 
-  function scrollHandler() {
-    if (window.scrollY >= 100) {
-      setIsFixed(true);
-    } else if (window.scrollY <= 50) {
-      setIsFixed(false);
-    }
-  }
-  window.addEventListener("scroll", scrollHandler);
+  useEffect(() => {
+    const scrollHandler = () => {
+      if (window.scrollY >= 100) setIsFixed(true);
+      else if (window.scrollY <= 50) setIsFixed(false);
+    };
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, []);
 
   return (
     <Navbar
@@ -30,7 +30,7 @@ const NavBar = () => {
           <ion-icon name="storefront"></ion-icon>
           <h1 className="logo">prime market</h1>
         </Navbar.Brand>
-        {/* Media cart and toggle */}
+
         <div className="d-flex" style={{ alignItems: "center", gap: "15px" }}>
           <div className="media-cart">
             <Link
@@ -63,18 +63,16 @@ const NavBar = () => {
               ></ion-icon>
             </Link>
           </div>
-
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
-            onClick={() => {
-              setExpand(expand ? false : "expanded");
-            }}
+            onClick={() => setExpand(expand ? false : "expanded")}
           >
             <span></span>
             <span></span>
             <span></span>
           </Navbar.Toggle>
         </div>
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="justify-content-end flex-grow-1 pe-3">
             <Nav.Item>
@@ -87,7 +85,6 @@ const NavBar = () => {
                 <span className="nav-link-label">Home</span>
               </Link>
             </Nav.Item>
-
             <Nav.Item>
               <Link
                 aria-label="Go to Shop Page"
