@@ -36,7 +36,7 @@ const ProductCard = ({ title, productItem }) => {
   };
 
   return (
-    <Col xl={3} lg={3} md={6} sm={12} xs={12} className="product mtop">
+    <Col xl={3} lg={3} md={6} sm={6} xs={6} className="product mtop">
       {title === "Big Discount" ? (
         <span className="discount">{productItem.discount}% Off</span>
       ) : null}
