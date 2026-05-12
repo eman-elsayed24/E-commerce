@@ -400,7 +400,7 @@ button.delete ion-icon {
   max-width: 100%;
 }
 
-.search-container input {
+.search-container > input {
   width: 100%;
   padding: 12px 45px 12px 20px;
   border: 2px solid #e0e0e0;
@@ -411,7 +411,7 @@ button.delete ion-icon {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.search-container input:focus {
+.search-container > input:focus {
   outline: none;
   border-color: #0f3460;
   box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.1);
