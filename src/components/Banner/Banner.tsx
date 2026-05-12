@@ -1,0 +1,26 @@
+import { Col, Container, Row } from "react-bootstrap";
+import productBg from "../../Images/2862666.jpg";
+import "./banner.css";
+
+interface BannerProps {
+  title: string;
+}
+
+const Banner = ({ title }: BannerProps) => {
+  return (
+    <div className="image-container">
+      <img src={productBg} alt="Product-bg" />
+      <div className="overlay">
+        <Container>
+          <Row>
+            <Col>
+              <h2>{title}</h2>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </div>
+  );
+};
+
+export default Banner;
