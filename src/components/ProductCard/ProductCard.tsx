@@ -83,7 +83,7 @@ const ProductCard = ({ title, productItem }: ProductCardProps) => {
             onClick={() => !isInCart && handelAdd(productItem)}
             disabled={isInCart}
           >
-            <ion-icon name={isInCart ? "checkmark" : "add"}></ion-icon>
+            <ion-icon name={isInCart ? "checkmark" : "cart-outline"}></ion-icon>
           </button>
         </div>
       </div>
