@@ -74,6 +74,12 @@ button {
   padding-bottom: 0 !important;
 }
 
+/* Hide Slider Arrows */
+.homeSlide .slick-prev,
+.homeSlide .slick-next {
+  display: none !important;
+}
+
 /*   ---Shop Pages---   */
 
 .image-container {
